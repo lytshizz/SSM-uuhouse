@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.house.uuhouse.dao.HouseMapper" >
+  <resultMap id="BaseResultMap" type="com.house.uuhouse.model.House" >
+    <id column="hid" property="hid" jdbcType="INTEGER" />
+    <result column="kind" property="kind" jdbcType="VARCHAR" />
+    <result column="htype" property="htype" jdbcType="VARCHAR" />
+    <result column="identify" property="identify" jdbcType="VARCHAR" />
+    <result column="layout" property="layout" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="areas" property="areas" jdbcType="VARCHAR" />
+    <result column="floor" property="floor" jdbcType="VARCHAR" />
+    <result column="untiprice" property="untiprice" jdbcType="INTEGER" />
+    <result column="area" property="area" jdbcType="INTEGER" />
+    <result column="countprice" property="countprice" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="village" property="village" jdbcType="VARCHAR" />
+    <result column="stretch" property="stretch" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="cx" property="cx" jdbcType="VARCHAR" />
+    <result column="htime" property="htime" jdbcType="VARCHAR" />
+    <result column="property_right" property="propertyRight" jdbcType="VARCHAR" />
+    <result column="elevator" property="elevator" jdbcType="VARCHAR" />
+    <result column="decorate" property="decorate" jdbcType="VARCHAR" />
+    <result column="himage" property="himage" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="feature" property="feature" jdbcType="VARCHAR" />
+    <result column="owner_mood" property="ownerMood" jdbcType="VARCHAR" />
+    <result column="areas_info" property="areasInfo" jdbcType="VARCHAR" />
+    <result column="am_environment" property="amEnvironment" jdbcType="VARCHAR" />
+    <result column="month_pay" property="monthPay" jdbcType="VARCHAR" />
+    <result column="map" property="map" jdbcType="VARCHAR" />
+    <result column="hstate" property="hstate" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="is_hot" property="isHot" jdbcType="INTEGER" />
+    <result column="hdate" property="hdate" jdbcType="TIMESTAMP" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    hid, kind, htype, identify, layout, title, areas, floor, untiprice, area, countprice, 
+    province, city, village, stretch, address, cx, htime, property_right, elevator, decorate, 
+    himage, description, feature, owner_mood, areas_info, am_environment, month_pay, 
+    map, hstate, uid, uname, phone, is_hot, hdate, cid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from house
+    where hid = #{hid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from house
+    where hid = #{hid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.house.uuhouse.model.House" >
+    insert into house (hid, kind, htype, 
+      identify, layout, title, 
+      areas, floor, untiprice, 
+      area, countprice, province, 
+      city, village, stretch, 
+      address, cx, htime, 
+      property_right, elevator, decorate, 
+      himage, description, feature, 
+      owner_mood, areas_info, am_environment, 
+      month_pay, map, hstate, 
+      uid, uname, phone, 
+      is_hot, hdate, cid
+      )
+    values (#{hid,jdbcType=INTEGER}, #{kind,jdbcType=VARCHAR}, #{htype,jdbcType=VARCHAR}, 
+      #{identify,jdbcType=VARCHAR}, #{layout,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{areas,jdbcType=VARCHAR}, #{floor,jdbcType=VARCHAR}, #{untiprice,jdbcType=INTEGER}, 
+      #{area,jdbcType=INTEGER}, #{countprice,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{village,jdbcType=VARCHAR}, #{stretch,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{cx,jdbcType=VARCHAR}, #{htime,jdbcType=VARCHAR}, 
+      #{propertyRight,jdbcType=VARCHAR}, #{elevator,jdbcType=VARCHAR}, #{decorate,jdbcType=VARCHAR}, 
+      #{himage,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, 
+      #{ownerMood,jdbcType=VARCHAR}, #{areasInfo,jdbcType=VARCHAR}, #{amEnvironment,jdbcType=VARCHAR}, 
+      #{monthPay,jdbcType=VARCHAR}, #{map,jdbcType=VARCHAR}, #{hstate,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{isHot,jdbcType=INTEGER}, #{hdate,jdbcType=TIMESTAMP}, #{cid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.house.uuhouse.model.House" >
+    insert into house
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hid != null" >
+        hid,
+      </if>
+      <if test="kind != null" >
+        kind,
+      </if>
+      <if test="htype != null" >
+        htype,
+      </if>
+      <if test="identify != null" >
+        identify,
+      </if>
+      <if test="layout != null" >
+        layout,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="areas != null" >
+        areas,
+      </if>
+      <if test="floor != null" >
+        floor,
+      </if>
+      <if test="untiprice != null" >
+        untiprice,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="countprice != null" >
+        countprice,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="village != null" >
+        village,
+      </if>
+      <if test="stretch != null" >
+        stretch,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="cx != null" >
+        cx,
+      </if>
+      <if test="htime != null" >
+        htime,
+      </if>
+      <if test="propertyRight != null" >
+        property_right,
+      </if>
+      <if test="elevator != null" >
+        elevator,
+      </if>
+      <if test="decorate != null" >
+        decorate,
+      </if>
+      <if test="himage != null" >
+        himage,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="feature != null" >
+        feature,
+      </if>
+      <if test="ownerMood != null" >
+        owner_mood,
+      </if>
+      <if test="areasInfo != null" >
+        areas_info,
+      </if>
+      <if test="amEnvironment != null" >
+        am_environment,
+      </if>
+      <if test="monthPay != null" >
+        month_pay,
+      </if>
+      <if test="map != null" >
+        map,
+      </if>
+      <if test="hstate != null" >
+        hstate,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="isHot != null" >
+        is_hot,
+      </if>
+      <if test="hdate != null" >
+        hdate,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hid != null" >
+        #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="htype != null" >
+        #{htype,jdbcType=VARCHAR},
+      </if>
+      <if test="identify != null" >
+        #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="layout != null" >
+        #{layout,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="areas != null" >
+        #{areas,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="untiprice != null" >
+        #{untiprice,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=INTEGER},
+      </if>
+      <if test="countprice != null" >
+        #{countprice,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="village != null" >
+        #{village,jdbcType=VARCHAR},
+      </if>
+      <if test="stretch != null" >
+        #{stretch,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cx != null" >
+        #{cx,jdbcType=VARCHAR},
+      </if>
+      <if test="htime != null" >
+        #{htime,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyRight != null" >
+        #{propertyRight,jdbcType=VARCHAR},
+      </if>
+      <if test="elevator != null" >
+        #{elevator,jdbcType=VARCHAR},
+      </if>
+      <if test="decorate != null" >
+        #{decorate,jdbcType=VARCHAR},
+      </if>
+      <if test="himage != null" >
+        #{himage,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null" >
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerMood != null" >
+        #{ownerMood,jdbcType=VARCHAR},
+      </if>
+      <if test="areasInfo != null" >
+        #{areasInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="amEnvironment != null" >
+        #{amEnvironment,jdbcType=VARCHAR},
+      </if>
+      <if test="monthPay != null" >
+        #{monthPay,jdbcType=VARCHAR},
+      </if>
+      <if test="map != null" >
+        #{map,jdbcType=VARCHAR},
+      </if>
+      <if test="hstate != null" >
+        #{hstate,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isHot != null" >
+        #{isHot,jdbcType=INTEGER},
+      </if>
+      <if test="hdate != null" >
+        #{hdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.house.uuhouse.model.House" >
+    update house
+    <set >
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
+      <if test="htype != null" >
+        htype = #{htype,jdbcType=VARCHAR},
+      </if>
+      <if test="identify != null" >
+        identify = #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="layout != null" >
+        layout = #{layout,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="areas != null" >
+        areas = #{areas,jdbcType=VARCHAR},
+      </if>
+      <if test="floor != null" >
+        floor = #{floor,jdbcType=VARCHAR},
+      </if>
+      <if test="untiprice != null" >
+        untiprice = #{untiprice,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=INTEGER},
+      </if>
+      <if test="countprice != null" >
+        countprice = #{countprice,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="village != null" >
+        village = #{village,jdbcType=VARCHAR},
+      </if>
+      <if test="stretch != null" >
+        stretch = #{stretch,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cx != null" >
+        cx = #{cx,jdbcType=VARCHAR},
+      </if>
+      <if test="htime != null" >
+        htime = #{htime,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyRight != null" >
+        property_right = #{propertyRight,jdbcType=VARCHAR},
+      </if>
+      <if test="elevator != null" >
+        elevator = #{elevator,jdbcType=VARCHAR},
+      </if>
+      <if test="decorate != null" >
+        decorate = #{decorate,jdbcType=VARCHAR},
+      </if>
+      <if test="himage != null" >
+        himage = #{himage,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null" >
+        feature = #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerMood != null" >
+        owner_mood = #{ownerMood,jdbcType=VARCHAR},
+      </if>
+      <if test="areasInfo != null" >
+        areas_info = #{areasInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="amEnvironment != null" >
+        am_environment = #{amEnvironment,jdbcType=VARCHAR},
+      </if>
+      <if test="monthPay != null" >
+        month_pay = #{monthPay,jdbcType=VARCHAR},
+      </if>
+      <if test="map != null" >
+        map = #{map,jdbcType=VARCHAR},
+      </if>
+      <if test="hstate != null" >
+        hstate = #{hstate,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="isHot != null" >
+        is_hot = #{isHot,jdbcType=INTEGER},
+      </if>
+      <if test="hdate != null" >
+        hdate = #{hdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.house.uuhouse.model.House" >
+    update house
+    set kind = #{kind,jdbcType=VARCHAR},
+      htype = #{htype,jdbcType=VARCHAR},
+      identify = #{identify,jdbcType=VARCHAR},
+      layout = #{layout,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      areas = #{areas,jdbcType=VARCHAR},
+      floor = #{floor,jdbcType=VARCHAR},
+      untiprice = #{untiprice,jdbcType=INTEGER},
+      area = #{area,jdbcType=INTEGER},
+      countprice = #{countprice,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      village = #{village,jdbcType=VARCHAR},
+      stretch = #{stretch,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      cx = #{cx,jdbcType=VARCHAR},
+      htime = #{htime,jdbcType=VARCHAR},
+      property_right = #{propertyRight,jdbcType=VARCHAR},
+      elevator = #{elevator,jdbcType=VARCHAR},
+      decorate = #{decorate,jdbcType=VARCHAR},
+      himage = #{himage,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      feature = #{feature,jdbcType=VARCHAR},
+      owner_mood = #{ownerMood,jdbcType=VARCHAR},
+      areas_info = #{areasInfo,jdbcType=VARCHAR},
+      am_environment = #{amEnvironment,jdbcType=VARCHAR},
+      month_pay = #{monthPay,jdbcType=VARCHAR},
+      map = #{map,jdbcType=VARCHAR},
+      hstate = #{hstate,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER},
+      uname = #{uname,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      is_hot = #{isHot,jdbcType=INTEGER},
+      hdate = #{hdate,jdbcType=TIMESTAMP},
+      cid = #{cid,jdbcType=INTEGER}
+    where hid = #{hid,jdbcType=INTEGER}
+  </update>
+</mapper>

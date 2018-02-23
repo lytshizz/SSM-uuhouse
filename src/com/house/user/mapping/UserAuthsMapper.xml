@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.house.user.dao.UserAuthsMapper" >
+  <resultMap id="BaseResultMap" type="com.house.user.model.UserAuths" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="identity_type" property="identityType" jdbcType="VARCHAR" />
+    <result column="identifier" property="identifier" jdbcType="VARCHAR" />
+    <result column="credential" property="credential" jdbcType="VARCHAR" />
+    <result column="reg_ip" property="regIp" jdbcType="BIGINT" />
+    <result column="reg_time" property="regTime" jdbcType="TIMESTAMP" />
+    <result column="login" property="login" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="last_login_ip" property="lastLoginIp" jdbcType="BIGINT" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, identity_type, identifier, credential, reg_ip, reg_time, login, update_time, 
+    last_login_ip, last_login_time, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_auths
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_auths
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.house.user.model.UserAuths" >
+    insert into user_auths (id, uid, identity_type, 
+      identifier, credential, reg_ip, 
+      reg_time, login, update_time, 
+      last_login_ip, last_login_time, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{identityType,jdbcType=VARCHAR}, 
+      #{identifier,jdbcType=VARCHAR}, #{credential,jdbcType=VARCHAR}, #{regIp,jdbcType=BIGINT}, 
+      #{regTime,jdbcType=TIMESTAMP}, #{login,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{lastLoginIp,jdbcType=BIGINT}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.house.user.model.UserAuths" >
+    insert into user_auths
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="identityType != null" >
+        identity_type,
+      </if>
+      <if test="identifier != null" >
+        identifier,
+      </if>
+      <if test="credential != null" >
+        credential,
+      </if>
+      <if test="regIp != null" >
+        reg_ip,
+      </if>
+      <if test="regTime != null" >
+        reg_time,
+      </if>
+      <if test="login != null" >
+        login,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="identityType != null" >
+        #{identityType,jdbcType=VARCHAR},
+      </if>
+      <if test="identifier != null" >
+        #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="credential != null" >
+        #{credential,jdbcType=VARCHAR},
+      </if>
+      <if test="regIp != null" >
+        #{regIp,jdbcType=BIGINT},
+      </if>
+      <if test="regTime != null" >
+        #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="login != null" >
+        #{login,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null" >
+        #{lastLoginIp,jdbcType=BIGINT},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.house.user.model.UserAuths" >
+    update user_auths
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="identityType != null" >
+        identity_type = #{identityType,jdbcType=VARCHAR},
+      </if>
+      <if test="identifier != null" >
+        identifier = #{identifier,jdbcType=VARCHAR},
+      </if>
+      <if test="credential != null" >
+        credential = #{credential,jdbcType=VARCHAR},
+      </if>
+      <if test="regIp != null" >
+        reg_ip = #{regIp,jdbcType=BIGINT},
+      </if>
+      <if test="regTime != null" >
+        reg_time = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="login != null" >
+        login = #{login,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip = #{lastLoginIp,jdbcType=BIGINT},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.house.user.model.UserAuths" >
+    update user_auths
+    set uid = #{uid,jdbcType=INTEGER},
+      identity_type = #{identityType,jdbcType=VARCHAR},
+      identifier = #{identifier,jdbcType=VARCHAR},
+      credential = #{credential,jdbcType=VARCHAR},
+      reg_ip = #{regIp,jdbcType=BIGINT},
+      reg_time = #{regTime,jdbcType=TIMESTAMP},
+      login = #{login,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      last_login_ip = #{lastLoginIp,jdbcType=BIGINT},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

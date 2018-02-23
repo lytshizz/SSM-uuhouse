@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.house.uploadfile.dao.UploadFileMapper" >
+  <resultMap id="BaseResultMap" type="com.house.uploadfile.model.UploadFile" >
+    <id column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="ftype" property="ftype" jdbcType="VARCHAR" />
+    <result column="filepath" property="filepath" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, ftype, filepath, cid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from uploadfile
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from uploadfile
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.house.uploadfile.model.UploadFile" >
+    insert into uploadfile (fid, ftype, filepath, 
+      cid)
+    values (#{fid,jdbcType=INTEGER}, #{ftype,jdbcType=VARCHAR}, #{filepath,jdbcType=VARCHAR}, 
+      #{cid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.house.uploadfile.model.UploadFile" >
+    insert into uploadfile
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="ftype != null" >
+        ftype,
+      </if>
+      <if test="filepath != null" >
+        filepath,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="ftype != null" >
+        #{ftype,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.house.uploadfile.model.UploadFile" >
+    update uploadfile
+    <set >
+      <if test="ftype != null" >
+        ftype = #{ftype,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        filepath = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.house.uploadfile.model.UploadFile" >
+    update uploadfile
+    set ftype = #{ftype,jdbcType=VARCHAR},
+      filepath = #{filepath,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=INTEGER}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>
