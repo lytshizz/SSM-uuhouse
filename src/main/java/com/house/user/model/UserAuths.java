@@ -3,9 +3,9 @@ package com.house.user.model;
 import java.util.Date;
 
 public class UserAuths {
-    private Integer id;
+    private String id;
 
-    private Integer uid;
+    private String uid;
 
     private String identityType;
 
@@ -27,20 +27,20 @@ public class UserAuths {
 
     private Byte status;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
-    public Integer getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUid(String uid) {
+        this.uid = uid == null ? null : uid.trim();
     }
 
     public String getIdentityType() {

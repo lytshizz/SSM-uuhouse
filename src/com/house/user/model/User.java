@@ -1,28 +1,26 @@
 package com.house.user.model;
 
-import java.util.Date;
-
 public class User {
-    private Integer uid;
+    private String uid;
 
     private String nickname;
 
     private String headimg;
 
-    private Byte sex;
+    private String sex;
 
-    private Date birthday;
+    private String birthday;
 
     private Integer score;
 
     private Byte status;
 
-    public Integer getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUid(String uid) {
+        this.uid = uid == null ? null : uid.trim();
     }
 
     public String getNickname() {
@@ -41,20 +39,20 @@ public class User {
         this.headimg = headimg == null ? null : headimg.trim();
     }
 
-    public Byte getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Byte sex) {
-        this.sex = sex;
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday == null ? null : birthday.trim();
     }
 
     public Integer getScore() {

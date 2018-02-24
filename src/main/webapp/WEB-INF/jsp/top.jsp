@@ -3,37 +3,36 @@
 <div class="container header">
 	<div class="span5">
 		<div class="logo">
-			<a href="./">
-				<img src="./image/logo.jpg" alt="优优二手房"/>
+			<a href="./uuhouse">
+				<img src="./images/logo.jpg" alt="优优二手房"/>
 			</a>
 		</div>
 	</div>
 	<div class="span9">
-		<div class="headerAd" >
-			<marquee scrollAmount=6 scrollDelay=3 direction=right style="color:#fff; height:50px; font-size: 32px;padding-top:12px">优优二手房</marquee>
-		</div>	
 	</div>
 	<div class="span10 last">
 		<div class="topNav clearfix">
 			<ul>
-				<c:if test='#session.existUser == null'>
+				<c:choose> 
+				<c:when test="${requestScope.resultId == null or requestScope.resultId == ''}">
 					<li id="headerLogin" class="headerLogin" style="display: list-item;">
-						<a href="./user_loginPage.action">登录</a>|
+						<a href="./user_login">登录</a>|
+					</li> 
+					<li id="headerRegister" class="headerRegister" style="display: list-item;">
+						<a href="./user_regist">注册</a>|
+					</li>
+				</c:when>
+				<c:otherwise>
+					<li id="headerLogin" class="headerLogin" style="display: list-item;">
+						<c:out value='${requestScope.resultId}'/>|
 					</li>
 					<li id="headerRegister" class="headerRegister" style="display: list-item;">
-						<a href="./user_registPage.action">注册</a>|
+						<a href="./user_quit">退出</a>|
 					</li>
-				</c:if>
-				<c:else>
-					<li id="headerLogin" class="headerLogin" style="display: list-item;">
-						<c:property value="#session.existUser.name"/>|
-					</li>
-					<li id="headerRegister" class="headerRegister" style="display: list-item;">
-						<a href="./user_quit.action">退出</a>|
-					</li>
-				</c:else>
+				</c:otherwise>
+				</c:choose> 
 				<li>
-					<a href="./user_center.action">个人中心</a>
+					<a href="./user_center">个人中心</a>
 					|
 				</li>
 				<li>
@@ -42,12 +41,11 @@
 				</li>
 				<li>
 					<a>关于我们</a>
-					
 				</li>
 			</ul>
 		</div>
 		<div class="cart">
-			<a href="./collection_myCollections.action">我的收藏</a>
+			<a href="./collection_myCollections">我的收藏</a>
 		</div>
 		<div class="phone">
 			客服热线:<strong>96008/5327776</strong>
@@ -56,7 +54,7 @@
 	<div class="span24">
 		<ul class="mainNav">
 			<li>
-				<a href="./uu_index.action">首页</a>
+				<a href="./uu_index">首页</a>
 				|
 			</li>
 			
@@ -86,4 +84,4 @@
 			</li>
 		</ul>
 	</div>
-</div>		
+</div>	

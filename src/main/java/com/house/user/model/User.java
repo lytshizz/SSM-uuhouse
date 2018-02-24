@@ -1,12 +1,10 @@
 package com.house.user.model;
 
-import java.sql.Timestamp;
-import java.util.Date;
 /*
  * 用户实体类
  * 对应数据表 user
  * @author yst
- * @Data 2018/02/01
+ * @Data 2018/02/23
  */
 public class User {
     private String uid;
@@ -15,9 +13,9 @@ public class User {
 
     private String headimg;
 
-    private Byte sex;
+    private String sex;
 
-    private Timestamp birthday;
+    private String birthday;
 
     private Integer score;
 
@@ -28,7 +26,7 @@ public class User {
     }
 
     public void setUid(String uid) {
-        this.uid = uid;
+        this.uid = uid == null ? null : uid.trim();
     }
 
     public String getNickname() {
@@ -47,20 +45,20 @@ public class User {
         this.headimg = headimg == null ? null : headimg.trim();
     }
 
-    public Byte getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Byte sex) {
-        this.sex = sex;
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
     }
 
-    public Timestamp getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Timestamp birthday) {
-        this.birthday = birthday;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday == null ? null : birthday.trim();
     }
 
     public Integer getScore() {

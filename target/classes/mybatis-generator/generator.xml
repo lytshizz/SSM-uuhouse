@@ -32,7 +32,7 @@
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 生成DAO的包名和位置 -->
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.house.user.dao" 
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.house.user.mapper" 
 			 targetProject="src">
 			 <property name="enableSubPackages" value="true" />
 		</javaClientGenerator>

@@ -8,6 +8,9 @@ import com.house.user.model.User;
  *
  */
 public interface UserService {
+	// 检查登录时输入的登录名和密码，返回true表示输入正确，false表示输入无效
+	public String[] checkLogin(String username, String password);
+	
 	//根据id查找
 	public User getUserById(String uid);
 	

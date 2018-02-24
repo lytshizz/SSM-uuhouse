@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.house.user.dao.UserAuthsMapper" >
+<mapper namespace="com.house.user.mapper.UserAuthsMapper" >
   <resultMap id="BaseResultMap" type="com.house.user.model.UserAuths" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="identity_type" property="identityType" jdbcType="VARCHAR" />
     <result column="identifier" property="identifier" jdbcType="VARCHAR" />
     <result column="credential" property="credential" jdbcType="VARCHAR" />
@@ -19,15 +19,15 @@
     id, uid, identity_type, identifier, credential, reg_ip, reg_time, login, update_time, 
     last_login_ip, last_login_time, status
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from user_auths
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user_auths
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.house.user.model.UserAuths" >
     insert into user_auths (id, uid, identity_type, 
@@ -35,7 +35,7 @@
       reg_time, login, update_time, 
       last_login_ip, last_login_time, status
       )
-    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{identityType,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, #{identityType,jdbcType=VARCHAR}, 
       #{identifier,jdbcType=VARCHAR}, #{credential,jdbcType=VARCHAR}, #{regIp,jdbcType=BIGINT}, 
       #{regTime,jdbcType=TIMESTAMP}, #{login,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{lastLoginIp,jdbcType=BIGINT}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
@@ -83,10 +83,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="uid != null" >
-        #{uid,jdbcType=INTEGER},
+        #{uid,jdbcType=VARCHAR},
       </if>
       <if test="identityType != null" >
         #{identityType,jdbcType=VARCHAR},
@@ -124,7 +124,7 @@
     update user_auths
     <set >
       <if test="uid != null" >
-        uid = #{uid,jdbcType=INTEGER},
+        uid = #{uid,jdbcType=VARCHAR},
       </if>
       <if test="identityType != null" >
         identity_type = #{identityType,jdbcType=VARCHAR},
@@ -157,11 +157,11 @@
         status = #{status,jdbcType=TINYINT},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.house.user.model.UserAuths" >
     update user_auths
-    set uid = #{uid,jdbcType=INTEGER},
+    set uid = #{uid,jdbcType=VARCHAR},
       identity_type = #{identityType,jdbcType=VARCHAR},
       identifier = #{identifier,jdbcType=VARCHAR},
       credential = #{credential,jdbcType=VARCHAR},
@@ -172,6 +172,6 @@
       last_login_ip = #{lastLoginIp,jdbcType=BIGINT},
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

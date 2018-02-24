@@ -1,15 +1,15 @@
-package com.house.user.dao;
+package com.house.user.mapper;
 
 import com.house.user.model.User;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer uid);
+    int deleteByPrimaryKey(String uid);
 
     int insert(User record);
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer uid);
+    User selectByPrimaryKey(String uid);
 
     int updateByPrimaryKeySelective(User record);
 

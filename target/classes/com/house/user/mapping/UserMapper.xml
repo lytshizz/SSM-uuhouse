@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!-- namespace的值就是dao接口的完整路径，就这个demo而言namespace 就是UserDao.java的完整路径-->
-<mapper namespace="com.house.user.mapper.UserMapper" > 
+<mapper namespace="com.house.user.mapper.UserMapper" >
   <resultMap id="BaseResultMap" type="com.house.user.model.User" >
     <id column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="headimg" property="headimg" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="TINYINT" />
-    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
     <result column="score" property="score" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
@@ -16,20 +16,20 @@
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
-    *
+    <include refid="Base_Column_List" />
     from user
     where uid = #{uid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user
-    where uid = #{uid}
+    where uid = #{uid,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.house.user.model.User" >
     insert into user (uid, nickname, headimg, 
       sex, birthday, score, 
       status)
     values (#{uid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR}, 
-      #{sex,jdbcType=TINYINT}, #{birthday,jdbcType=TIMESTAMP}, #{score,jdbcType=INTEGER}, 
+      #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
       #{status,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.house.user.model.User" >
@@ -68,10 +68,10 @@
         #{headimg,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
-        #{sex,jdbcType=TINYINT},
+        #{sex,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null" >
-        #{birthday,jdbcType=TIMESTAMP},
+        #{birthday,jdbcType=VARCHAR},
       </if>
       <if test="score != null" >
         #{score,jdbcType=INTEGER},
@@ -91,10 +91,10 @@
         headimg = #{headimg,jdbcType=VARCHAR},
       </if>
       <if test="sex != null" >
-        sex = #{sex,jdbcType=TINYINT},
+        sex = #{sex,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null" >
-        birthday = #{birthday,jdbcType=TIMESTAMP},
+        birthday = #{birthday,jdbcType=VARCHAR},
       </if>
       <if test="score != null" >
         score = #{score,jdbcType=INTEGER},
@@ -109,8 +109,8 @@
     update user
     set nickname = #{nickname,jdbcType=VARCHAR},
       headimg = #{headimg,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=TINYINT},
-      birthday = #{birthday,jdbcType=TIMESTAMP},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
       score = #{score,jdbcType=INTEGER},
       status = #{status,jdbcType=TINYINT}
     where uid = #{uid,jdbcType=VARCHAR}

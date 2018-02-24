@@ -3,18 +3,20 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<base href="<%=basePath%>">
+		<base href="<%=basePath%>"/>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<title>登录</title>
 		
 		<link href="./css/common.css" rel="stylesheet" type="text/css"/>
 		<link href="./css/login.css" rel="stylesheet" type="text/css"/>
 		
-		<script language="JavaScript" src="./js/head.js"></script>
+		<script type="text/javascript" src="./js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="./js/head.js"></script>
+		<script type="text/javascript" src="./js/login.js"></script>
 	</head>
 	<body>
 	<!-- *********************顶部********************** -->	
@@ -24,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="container login">
 		<div class="span12">
 			<div class="ad">
-				<img src="./image/login.jpg" width="500" height="330" alt="房源样式" title="房源样式"></img>
+				<img src="./images/login.jpg" width="500" height="330" alt="房源样式" title="房源样式"></img>
 			</div>
 		</div>
 		
@@ -34,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="title">
 						<strong>会员登录</strong>USER LOGIN 
 					</div>
-					<form id="loginForm" action="./user_checkLogin.action" method="post">
+					<form id="loginForm">
 						<table>
 							<tbody>
 								<tr>
@@ -52,10 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<td>
 										<input type="password" id="password" name="password" class="text" maxlength="20" autocomplete="off"/>
 										<br/>
-										<% if(request.getAttribute("msg") != null) {
-											out.print(request.getAttribute("msg"));
-										}%>
-											
+										<span id="errorTip"></span>
 									</td>
 								</tr>
 								<tr>
@@ -74,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<th>&nbsp;
 									</th>
 									<td>
-										<input type="submit" class="submit" value="登 录"/>
+										<input id="submit" type="button" class="submit" value="登 录"/>
 									</td>
 								</tr>
 								<tr class="register">
@@ -85,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<dt>还没有注册账号？</dt>
 											<dd>
 												立即注册即可体验在线买房！
-												<a href="./user_registPage.action">立即注册</a>
+												<a href="./user_regist">立即注册</a>
 											</dd>
 										</dl>
 									</td>
