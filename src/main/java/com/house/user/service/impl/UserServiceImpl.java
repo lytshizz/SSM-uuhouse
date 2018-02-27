@@ -1,5 +1,7 @@
 package com.house.user.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -13,6 +15,7 @@ import com.house.user.mapper.UserMapper;
 import com.house.user.model.User;
 import com.house.user.model.UserAuths;
 import com.house.user.service.UserService;
+import com.house.utils.UUIDUtils;
 
 /**
  * UserService的实现类
@@ -38,13 +41,13 @@ public class UserServiceImpl implements UserService{
 	@Resource
 	private UserAuthsMapper userAuthsDao;
 	
+	// 检查登录时输入的登录名和密码
 	public String[] checkLogin(String username, String password) {
 		String[] resultArr = new String[2];
 		String resultMsg = "";
 		String resultId = "";
 		System.out.println("用户名：" + username + ",密码：" + password);
 		UserAuths userAuths = userAuthsDao.selectByIdentifier(username);
-		System.out.println("用户信息为空：" + (userAuths == null));
 		
 		if(null == userAuths) {
 			resultMsg = "notRegist";
@@ -69,6 +72,46 @@ public class UserServiceImpl implements UserService{
 		resultArr[0] = resultMsg;
 		resultArr[1] = resultId;
 		return resultArr;
+	}
+	
+	// 根据用户名查找用户
+	public boolean findByUserName(String username) {
+		UserAuths result = getUserByIdentifier(username);
+		System.out.println("查询用户名结果：" + result);
+		return  null != result;
+	}
+	
+	// 根据验证码判断用户是否注册成功
+	public String regist(UserAuths userAuths,String checkcode, String sessionCheckcode) throws ParseException {
+		String msgResult = "registSuccess";
+		if(!sessionCheckcode.equalsIgnoreCase(checkcode)){
+			msgResult = "registFailed";
+		}
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String time = "1000-01-01 00:00:00";
+		Date startTime = format.parse(time);
+		
+		// 将信息保存到UserAuths表中
+		String uid = UUIDUtils.getUUID();
+		userAuths.setId(UUIDUtils.getUUID());
+		userAuths.setUid(uid);
+		userAuths.setIdentityType(userAuths.getIdentityType());
+		userAuths.setIdentifier(userAuths.getIdentifier());
+		userAuths.setCredential(userAuths.getCredential());
+		userAuths.setUpdateTime(startTime);
+		userAuths.setLastLoginTime(startTime);
+		userAuths.setStatus((byte)1);
+		userAuths.setRegTime(new Date());
+		insertSelective(userAuths);
+		
+		// 保存到user表中
+		User user = new User();
+		user.setUid(uid);
+		user.setNickname(userAuths.getIdentifier());
+		insertSelective(user);
+		
+		return msgResult;
 	}
 	
 	/*******************数据库user的增删改查***********************/

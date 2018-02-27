@@ -1,8 +1,10 @@
 package com.house.user.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.house.user.model.User;
+import com.house.user.model.UserAuths;
 import com.house.user.service.UserService;
 
 @Controller
@@ -52,68 +55,69 @@ public class UserController {
 	@RequestMapping("/user_checkLogin")
 	@ResponseBody
 	public String[] checkLogin(@RequestParam("username")String username, @RequestParam("password")String password, HttpSession httpSession) {
-		System.out.println(username+":"+password);
 		String[] returnMsg = userService.checkLogin(username, password);
 		System.out.println("返回提示信息：" + returnMsg[0] + ",返回用户uid：" + returnMsg[1]);
 		if(!"".equals(returnMsg[1])) {
-			httpSession.setAttribute("uid", returnMsg[1]);
+			User user = userService.getUserById(returnMsg[1]);
+			httpSession.setAttribute("user", user);
 		}
 		return returnMsg;
 	}
 
 	/**
-	 * 测试查询
-	 * @param id
-	 * @param model
-	 * @return
+	 * 用户退出的方法
 	 */
-	@RequestMapping("/showUser")
-	public String testShowUser(@RequestParam(value = "id")String id, Model model) {
-		System.out.println("id:" + id);
-		User user = userService.getUserById(id);
-		System.out.println("用户生日：" + user.getBirthday());
-		model.addAttribute("user", user);
-		return "showUser";
+	@RequestMapping("/user_quit")
+	public String quit(HttpSession httpSession) {
+		httpSession.invalidate();
+		return "index";
+	}
+	
+	/*******************************************用户注册部分****************************************/
+	/**
+	 * 跳转到注册页面的执行方法
+	 */
+	@RequestMapping("user_toregist")
+	public String registPage() {
+		return "regist";
+	}
+
+	/**
+	 * AJAX进行异步校验用户名的执行方法
+	 */
+	@RequestMapping("user_checkUserName")
+	@ResponseBody
+	public boolean checkUserName(@RequestParam("username")String username) {
+		// 调用UserService进行查询:存在返回true
+		System.out.println("用户名：" + username);
+		boolean userNameExist = userService.findByUserName(username);
+		return userNameExist;
 	}
 	
 	/**
-	 * 测试删除
-	 * @param id
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/deleteUser")
-	public void testDeleteUser(@RequestParam(value = "id")String id) {
-		System.out.println("id:" + id);
-		int num = -1;
-		try {
-			num = userService.deleteUserById(id);
-			System.out.println("删除行数：" + num);
-		}
-		catch(Exception e) {
-			System.out.println(e);
-		}
-	}
-	
-	/**
-	 * 测试插入数据
-	 * @return
+	 * 用户注册的方法:
+	 * @throws IOException 
 	 * @throws ParseException 
 	 */
-	@RequestMapping("/insertUser")
-	public String testInsertUser(Model model) throws ParseException {
-		User user = new User();
-		user.setUid("5");
-		user.setNickname("笑颜如花");
-//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//		Date date = format.parse("1994-05-23 00:00:01");
-//		Timestamp tsp = new Timestamp(date.getTime());
-		/*user.setBirthday(tsp);
-		user.setSex((byte)1); */
-		model.addAttribute("user", user);
-		int count = userService.insertSelective(user);
-		System.out.println("插入" + count + "条用户成功");
-		return "showUser";
+	@RequestMapping("user_regist")
+	public String regist(UserAuths userAuths, @RequestParam("checkcode")String checkcode, 
+			HttpServletRequest request, HttpSession httpSession) throws IOException, ParseException {
+		// 判断验证码程序:
+		// 从session中获得验证码的随机值:
+		System.out.println("获取验证码：" + checkcode);
+		String sessionCheckcode = (String) httpSession.getAttribute("checkCode");
+		System.out.println("session中的code:" + sessionCheckcode);
+		String msg = userService.regist(userAuths, checkcode, sessionCheckcode);
+		if("registFailed".equals(msg)){
+			request.setAttribute("registErrorMsg", "验证码输入错误!");
+			return "regist";
+		}
+		else
+		{
+			httpSession.setAttribute("registMsg", "注册成功!请前往登录!");
+			return "message";
+		}
 	}
+
 
 }

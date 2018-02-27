@@ -9,15 +9,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>会员注册</title>
-<link href="./css/common.css" rel="stylesheet" type="text/css"/>
+<!-- <link href="./css/common.css" rel="stylesheet" type="text/css"/>
 <link href="./css/register.css" rel="stylesheet" type="text/css"/>
 
-<script type="text/javascript" src="./js/jquery-1.8.3.js"></script>
-<script type="text/javascript" src="./js/regist.js" ></script>
+<script src="./js/regist.js" type="text/javascript"/> -->
 </head>
 <body>
 <!-- *********************顶部********************** -->	
-	<%@ include file="top.jsp" %>
+<%-- 	<%@ include file="../jsp/top.jsp" %> --%>
 	
 <!-- ********************中间内容********************* -->
 	<div class="container register">
@@ -26,6 +25,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="main clearfix">
 					<div class="title">
 						<strong>会员注册</strong>USER REGISTER
+					</div>
+					<div>
+						<%-- <c:out value="${requestScope.errorMsg}" /> --%>
 					</div>
 					<form id="registerForm"  action="./user_regist" method="post" onsubmit="return checkForm();" >
 						<table>
@@ -44,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<span class="requiredField">*</span>注册方式:
 									</th>
 									<td>
-										<select id="identityType" name="identityType" class="text">
+										<select id="identity_type" name="identity_type">
 										<option value='username' selected="selected">用户名注册</option>
 										<option value='phone'>手机注册</option>
 										<option value='email'>邮箱注册</option>
@@ -56,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<span class="requiredField">*</span>用户名:
 									</th>
 									<td>
-										<input type="text" id="username" name="identifier" class="text" maxlength="20" onblur="checkUserName()"/>
+										<input type="text" id="username" name="username" class="text" maxlength="20" onblur="checkUserName()"/>
 										<span id="usernameError"></span>
 									</td>
 								</tr>
@@ -65,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<span class="requiredField">*</span>密&nbsp;&nbsp;码:
 									</th>
 									<td>
-										<input type="password" id="password" name="credential" class="text" maxlength="20" autocomplete="off"/>
+										<input type="password" id="password" name="password" class="text" maxlength="20" autocomplete="off"/>
 										<span id="passwordError"></span>
 									</td>
 								</tr>
@@ -87,11 +89,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<input type="text" id="checkcode" name="checkcode" class="text captcha" maxlength="4" autocomplete="off">
 												<img id="checkImg" class="captchaImage" src="./checkImg" onclick="change()" title="点击更换验证码" />
 											</input>
-										</span>
-										<span id="checkcodeError">
-											<font color="red" size="2px">
-												<c:out value="${requestScope.registErrorMsg}"></c:out>
-											</font>
 										</span>
 									</td>
 								</tr>
@@ -254,6 +251,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	
 <!-- *********************底部********************** -->       
-	<%@ include file="bottom.jsp" %>
+<%-- 	<%@ include file="bottom.jsp" %> --%>
 </body>
 </html>

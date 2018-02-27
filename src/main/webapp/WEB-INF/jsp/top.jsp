@@ -14,17 +14,17 @@
 		<div class="topNav clearfix">
 			<ul>
 				<c:choose> 
-				<c:when test="${requestScope.resultId == null or requestScope.resultId == ''}">
+				<c:when test="${empty sessionScope.user}">
 					<li id="headerLogin" class="headerLogin" style="display: list-item;">
 						<a href="./user_login">登录</a>|
 					</li> 
 					<li id="headerRegister" class="headerRegister" style="display: list-item;">
-						<a href="./user_regist">注册</a>|
+						<a href="./user_toregist">注册</a>|
 					</li>
 				</c:when>
 				<c:otherwise>
 					<li id="headerLogin" class="headerLogin" style="display: list-item;">
-						<c:out value='${requestScope.resultId}'/>|
+						<c:out value='${sessionScope.user.nickname}'/>|
 					</li>
 					<li id="headerRegister" class="headerRegister" style="display: list-item;">
 						<a href="./user_quit">退出</a>|

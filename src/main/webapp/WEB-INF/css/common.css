@@ -456,6 +456,20 @@ input.text {
 	background: url(../images/common.gif) 0px 0px no-repeat;
 }
 
+select.text {
+	width: 230px;
+	height: 28px;
+	line-height: 28px;
+	padding: 0px 4px;
+	color: #666666;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border: 1px solid;
+	border-color: #b8b8b8 #dcdcdc #dcdcdc #b8b8b8;
+	background: url(../images/common.gif) 0px 0px no-repeat;
+}
+
 input.text[type=file] {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;

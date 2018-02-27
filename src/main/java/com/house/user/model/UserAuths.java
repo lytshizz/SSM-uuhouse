@@ -122,4 +122,13 @@ public class UserAuths {
     public void setStatus(Byte status) {
         this.status = status;
     }
+
+	@Override
+	public String toString() {
+		return "UserAuths [id=" + id + ", uid=" + uid + ", identityType=" + identityType + ", identifier=" + identifier
+				+ ", credential=" + credential + ", regIp=" + regIp + ", regTime=" + regTime + ", login=" + login
+				+ ", updateTime=" + updateTime + ", lastLoginIp=" + lastLoginIp + ", lastLoginTime=" + lastLoginTime
+				+ ", status=" + status + "]";
+	}
+    
 }
