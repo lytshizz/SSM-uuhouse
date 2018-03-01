@@ -6,18 +6,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<base href="<%=basePath%>"/>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>优优二手房</title>
-<link href="./css/common.css" rel="stylesheet" type="text/css"/>
-<link href="./css/home.css" rel="stylesheet" type="text/css"/>
-<link href="./css/post.css" rel="stylesheet" type="text/css"/>
-<link href="./css/product.css" rel="stylesheet" type="text/css"/>
-
-<script type="text/javascript" src="./js/jquery-1.8.3.js"></script>
-<script type="text/javascript" src="./js/area.js"></script>
-</head>
+	<head>
+		<base href="<%=basePath%>"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>优优二手房</title>
+		<link href="./css/common.css" rel="stylesheet" type="text/css"/>
+		<link href="./css/home.css" rel="stylesheet" type="text/css"/>
+		<link href="./css/post.css" rel="stylesheet" type="text/css"/>
+		<link href="./css/product.css" rel="stylesheet" type="text/css"/>
+		
+		<script type="text/javascript" src="./js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="./js/area.js"></script>
+	</head>
 <body>
 <!-- *********************顶部********************** -->	
 
